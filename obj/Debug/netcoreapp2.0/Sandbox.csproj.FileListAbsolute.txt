@@ -1,0 +1,11 @@
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\bin\Debug\netcoreapp2.0\Sandbox.deps.json
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\bin\Debug\netcoreapp2.0\Sandbox.runtimeconfig.json
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\bin\Debug\netcoreapp2.0\Sandbox.runtimeconfig.dev.json
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\bin\Debug\netcoreapp2.0\Sandbox.dll
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\bin\Debug\netcoreapp2.0\Sandbox.pdb
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.csprojAssemblyReference.cache
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.csproj.CoreCompileInputs.cache
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.AssemblyInfoInputs.cache
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.AssemblyInfo.cs
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.dll
+C:\Users\lacric\Documents\ProjectsLocal\Sandbox\Sandbox\obj\Debug\netcoreapp2.0\Sandbox.pdb

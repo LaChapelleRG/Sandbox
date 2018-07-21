@@ -1,0 +1,177 @@
+<div class="main">
+  <div *ngIf="!links">
+    <i class="fa fa-gear fa-spin" style="font-size:24px"></i>
+    loading Links...
+  </div>
+  <div *ngIf="links">
+    <div class="panel panel-default">
+      <div class="panel-heading" data-toggle="collapse" data-target="#links-list">
+        Links
+        <span class="badge">{{links.length}}</span>
+      </div>
+      <div class="panel-body collapse in" id="links-list">
+        <div class="list-group">
+          <a *ngFor="let link of links" class="list-group-item">
+            <span class="link-name" (click)='openLink(link.url)'>{{link.displayedName}}</span>
+            <i class="glyphicon glyphicon-trash" (click)='delete(link.id)' data-toggle="modal" data-target="#deleteModal"></i>
+            <i class="glyphicon glyphicon-edit" (click)='edit(link.id)' data-toggle="modal" data-target="#editModal"></i>
+          </a>
+        </div>
+        <a class="btn btn-primary btnAdd" data-toggle="modal" data-target="#addModal">
+          <i class="glyphicon glyphicon-plus"></i>
+          Add
+        </a>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!--AddModal-->
+<div id="addModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <form #addForm="ngForm" novalidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Link</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="addMain form-group ">
+            <div class="form-inline" [class.has-error]="Name.invalid && Name.dirty">
+              <label for="tbAddName" class="col-md-3 control-label">Name: </label>
+              <input type="text" [(ngModel)]="name" #Name="ngModel" name="name" class="form-control" id="tbAddName" required>
+            </div>
+            <div *ngIf="Name.invalid && Name.dirty" class="text-danger col-md-offset-3">
+              * A Name value is required.
+            </div>
+            <div class="form-inline" [class.has-error]="URL.invalid && URL.dirty">
+              <label for="tbAddUrl" class="col-md-3 control-label">Url: </label>
+              <input type="text" [(ngModel)]="url" #URL="ngModel" name="url" class="form-control" id="tbAddUrl" required>
+            </div>
+            <div *ngIf="URL.invalid && URL.dirty" class="text-danger col-md-offset-3">
+              * A URL value is required.
+            </div>
+            <div class="form-inline" [class.has-error]="Sort.invalid && Sort.dirty">
+              <label for="addSort" class="col-md-3 control-label">Sort:</label>
+              <input type="number" [(ngModel)]="sort" #Sort="ngModel" name="sort" class="form-control" id="tbAddSort" required>
+            </div>
+            <div *ngIf="Sort.invalid && Sort.dirty" class="text-danger col-md-offset-3">
+              * A Sort value is required.
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary add col-md-offset-8" [disabled]="addForm.invalid" (click)="add()" data-dismiss="modal">
+            <i class="glyphicon glyphicon-plus"></i>
+            Add
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="cancel()">
+            <i class="fa fa-close"></i>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Edit Modal-->
+<div id="editModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <form #editForm="ngForm" novalidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Link</h4>
+        </div>
+        <div class="modal-body">
+          <div class="EditMain" *ngIf="selectedLink">
+            <div class="form-group">
+              <div class="form-inline">
+                <label for="tbId" class="col-md-4">Id: </label>
+                <input type="text" name="id" [(ngModel)]="selectedLink.id" class="form-control disabled" id="tbId" disabled>
+              </div>
+              <div class="form-inline left" [class.has-error]="EditName.invalid && EditName.dirty">
+                <label for="tbName" class="col-md-4">Name: </label>
+                <input type="text" #EditName="ngModel" name="name" [(ngModel)]="selectedLink.displayedName" class="form-control" id="tbName"
+                  required>
+              </div>
+              <div *ngIf="EditName.invalid && EditName.dirty" class="text-danger col-md-offset-3">
+                * A Name value is required.
+              </div>
+              <div class="form-inline" [class.has-error]="EditUrl.invalid && EditUrl.dirty">
+                <label for="tbUrl" class="col-md-4">Url: </label>
+                <input type="text" #EditUrl="ngModel" name="url" [(ngModel)]="selectedLink.url" class="form-control" id="tbUrl" required>
+                <input type="button" data-toggle="tooltip" [disabled]="EditUrl.invalid" title="View..." class="btn btn-default" (click)="openLink(selectedLink.url)"
+                  value="...">
+              </div>
+              <div *ngIf="EditUrl.invalid && EditUrl.dirty" class="text-danger col-md-offset-3">
+                * A Url value is required.
+              </div>
+              <div class="form-inline">
+                <label for="tbCreateTimestamp" class="col-md-4">Create Timestamp: </label>
+                <input type="text" name="createTimestamp" [(ngModel)]="selectedLink.createTimestamp" class="form-control" id="tbCreateTimestamp"
+                  disabled>
+              </div>
+              <div class="form-inline" [class.has-error]="EditSort.invalid && EditSort.dirty">
+                <label for="tbSort" class="col-md-4 control-label">Sort:</label>
+                <input type="number" #EditSort="ngModel" name="editSort" [(ngModel)]="selectedLink.sort" class="form-control" id="tbEditSort"
+                  required>
+              </div>
+              <div *ngIf="EditSort.invalid && EditSort.dirty" class="text-danger col-md-offset-3">
+                * A sort order is required.
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="visible" disabled [(ngModel)]="selectedLink.visible"> Visible
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" *ngIf="selectedLink">
+          <button class="btn btn-primary" [disabled]="editForm.invalid" data-dismiss="modal" (click)="update()">
+              <i class="glyphicon glyphicon-save"></i>
+            Update
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            <i class="fa fa-close"></i>
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!--Delete Modal-->
+<div id="deleteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Link</h4>
+      </div>
+      <div class="modal-body">
+        <div class="deleteMain">
+          <label>Are you sure that you want to delete this link?</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="confirmDelete()">
+          <i class="fa fa-trash"></i>
+          Yes
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          <i class="fa fa-close"></i>
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

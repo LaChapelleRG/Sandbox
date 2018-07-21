@@ -1,0 +1,46 @@
+.btnAdd{
+    float: right;
+    margin-bottom: 10px;
+}
+
+.link-name{
+    cursor: pointer;
+}
+
+.glyphicon-edit{
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.glyphicon-trash{
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#tbUrl{
+    margin-left: 36px;
+}
+
+#tbCreateTimestamp{
+    margin-right: 50px;
+}
+
+#lblError{
+    margin-left: 10px;
+}
+
+.panel-body{
+    padding: 3px;
+}
+
+.panel-heading{
+    cursor: pointer;
+}
+
+#tbUrl {
+    margin-left: 0px;
+}

@@ -1,0 +1,33 @@
+
+.banner-image{
+  width: 100%;
+  height: 200px;
+}
+
+.well{
+  margin:0;
+  padding: 0;
+}
+
+.navbar{
+  margin-bottom: 0px;
+}
+
+.navbar-nav{
+  padding-left: 50px;
+}
+
+.navbar-brand{
+  font-size: 20px;
+}
+
+.main-container{
+  padding-top: 5px;
+}
+
+footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
